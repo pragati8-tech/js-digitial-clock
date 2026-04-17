@@ -15,10 +15,13 @@ let hour = "00";
 let min = "00";
 let sec = "00";
 let ampm = "ampm";
-
+ 
 setInterval(() => {
+    let rawHour = fullDate.getHours();          
+    ampm = rawHour >= 12 ? 'PM' : 'AM';          
+    rawHour = rawHour % 12 || 12;   
     fullDate = new Date();
-    hour = String(fullDate.getHours()).padStart(2, "0");
+     hour = String(rawHour).padStart(2, "0");  
     min = String(fullDate.getMinutes()).padStart(2, "0");
     sec = String(fullDate.getSeconds()).padStart(2, "0");
     ampm = hour >= 12 ? 'PM' : 'AM';
@@ -35,7 +38,7 @@ secondDisplay.innerHTML = sec;
 ampmDisplay.innerHTML = ampm;
 
 // getting current date
-let date = fullDate.getDate();
+let date = fullDate.toLocaleString('en-US', { hour: 'numeric', hour12: true })
 let month = fullDate.toLocaleString('default', { month: 'long' });;
 let year = fullDate.getFullYear();
 
